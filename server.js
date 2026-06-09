@@ -10,9 +10,6 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname)));
 
-// In-memory code store: { email -> { code, expiresAt } }
-const codes = new Map();
-
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -21,12 +18,15 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// In-memory code store: { email -> { code, expiresAt } }
+const codes = new Map();
+
 app.post('/api/send-code', async (req, res) => {
   const { name, email } = req.body;
   if (!name || !email) return res.status(400).json({ error: 'Missing name or email' });
 
   const code = crypto.randomInt(100000, 999999).toString();
-  codes.set(email, { code, expiresAt: Date.now() + 10 * 60 * 1000 }); // 10 min
+  codes.set(email, { code, expiresAt: Date.now() + 10 * 60 * 1000 });
 
   try {
     await transporter.sendMail({
