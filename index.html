@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pullivara Career Clarity Test</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ══ SCREEN 1: LANDING ══ -->
+<div id="screen-landing" class="screen active">
+  <div class="landing-hero">
+    <h1>PULLIVARA CAREER CLARITY TEST</h1>
+    <p>Every step towards success begins with insight</p>
+    <div>
+      <button class="btn-gold" onclick="goTo('screen-access')">Start the test</button>
+    </div>
+  </div>
+
+  <div class="landing-body">
+    <div class="landing-left">
+      <h2>What to expect?</h2>
+      <p>Together, these two sections offer a crystal-clear snapshot of your current reality and provide a tailored career direction for sustainable progress and professional success.</p>
+      <p>It only takes 5–7 minutes and there are no right or wrong answers, only honest ones that reflect where you are right now.</p>
+      <p>On behalf of Pullivara Group, I'm honoured to walk with you through this journey of personal clarity.</p>
+      <p>See you on the other side.</p>
+      <p>Warmly,<br><em>Uagona Dietz</em><br>Founder & Principal Consultant, Pullivara Group.</p>
+
+      <div class="landing-logo-area">
+        <div class="logo-block">
+          <svg class="logo-svg" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="100" cy="72" rx="28" ry="36" fill="#1a1a2e"/>
+            <path d="M100 36 C100 36 80 20 55 28 C30 36 20 60 30 80 C40 100 70 104 100 108 C130 104 160 100 170 80 C180 60 170 36 145 28 C120 20 100 36 100 36Z" fill="#1a1a2e" opacity="0.15"/>
+            <path d="M40 75 C20 65 8 50 14 35 C20 20 40 18 55 28" stroke="#b89a2a" stroke-width="8" stroke-linecap="round" fill="none"/>
+            <path d="M160 75 C180 65 192 50 186 35 C180 20 160 18 145 28" stroke="#b89a2a" stroke-width="8" stroke-linecap="round" fill="none"/>
+            <path d="M40 75 C25 82 14 95 20 108 C26 121 44 120 55 112" stroke="#b89a2a" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <path d="M160 75 C175 82 186 95 180 108 C174 121 156 120 145 112" stroke="#b89a2a" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <ellipse cx="100" cy="56" rx="14" ry="10" fill="#b89a2a" opacity="0.7"/>
+            <path d="M86 56 Q100 40 114 56" fill="#1a1a2e"/>
+            <circle cx="100" cy="76" r="20" fill="#1a1a2e"/>
+            <text x="100" y="145" text-anchor="middle" font-family="Arial" font-weight="800" font-size="18" letter-spacing="5" fill="#1a1a2e">PULLIVARA</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="landing-right">
+      <p class="landing-intro-text">Welcome and congratulations on taking this first step forward—elevating your career to heights we know you are capable of.<br><br>
+      By simply arriving here, you've demonstrated a mindset shift backed by modern science, significantly accelerating your chances of long-term success. That alone is worth celebrating.<br><br>
+      This isn't just another quiz. It's a two-part assessment intentionally designed to help pinpoint where you are, and show you what's possible next.</p>
+
+      <div class="section-card">
+        <h3>Section 1: Career Stage Diagnostic</h3>
+        <p>A set of 12 questions that assess the current phase of your career journey. Are you Surviving, Stabilising, or Strategising? You'll find out here.</p>
+      </div>
+      <div class="section-card">
+        <h3>Section 2: Career Persona Archetype</h3>
+        <p>A reflective section to help identify how your lived context, such as relocation, reinvention, or re-emergence, is shaping your professional identity and opportunities.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 2: REQUEST ACCESS ══ -->
+<div id="screen-access" class="screen">
+  <div style="padding: 32px 60px; display:flex; align-items:center; gap:12px; border-bottom: 1px solid #ccc;">
+    <svg class="logo-svg" style="width:40px" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="76" r="20" fill="#1a1a2e"/>
+      <path d="M40 75 C20 65 8 50 14 35 C20 20 40 18 55 28" stroke="#b89a2a" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <path d="M160 75 C180 65 192 50 186 35 C180 20 160 18 145 28" stroke="#b89a2a" stroke-width="10" stroke-linecap="round" fill="none"/>
+    </svg>
+    <span style="font-weight:800; letter-spacing:3px; font-size:14px; color:#1a1a2e;">PULLIVARA</span>
+  </div>
+
+  <div class="access-container" style="margin: auto;">
+    <div class="access-form">
+      <h2>Request Quiz Access</h2>
+      <div class="form-group">
+        <label>First name</label>
+        <input type="text" id="input-name" placeholder="" />
+      </div>
+      <div class="form-group">
+        <label>Your email</label>
+        <input type="email" id="input-email" placeholder="" />
+        <div class="form-hint">Get access code via email</div>
+      </div>
+      <button class="btn-gold" onclick="sendCode()">Send code</button>
+    </div>
+
+    <div class="access-logo">
+      <div class="logo-block">
+        <svg class="logo-svg" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="72" rx="28" ry="36" fill="#1a1a2e"/>
+          <path d="M40 75 C20 65 8 50 14 35 C20 20 40 18 55 28" stroke="#b89a2a" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <path d="M160 75 C180 65 192 50 186 35 C180 20 160 18 145 28" stroke="#b89a2a" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <path d="M40 75 C25 82 14 95 20 108 C26 121 44 120 55 112" stroke="#b89a2a" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <path d="M160 75 C175 82 186 95 180 108 C174 121 156 120 145 112" stroke="#b89a2a" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <ellipse cx="100" cy="56" rx="14" ry="10" fill="#b89a2a" opacity="0.7"/>
+          <path d="M86 56 Q100 40 114 56" fill="#1a1a2e"/>
+          <circle cx="100" cy="76" r="20" fill="#1a1a2e"/>
+          <text x="100" y="145" text-anchor="middle" font-family="Arial" font-weight="800" font-size="18" letter-spacing="5" fill="#1a1a2e">PULLIVARA</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL: EMAIL CONFIRMATION ══ -->
+<div id="modal-email" class="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h3>We've sent the code to your email!</h3>
+    <p>Check your spam folder as well</p>
+    <input type="text" id="input-code" placeholder="Access code" />
+    <button class="btn-dark" onclick="enterCode()">Enter</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 3: SECTION 1 INTRO ══ -->
+<div id="screen-intro1" class="screen">
+  <div class="intro-container">
+    <h2>Let's Continue with Career Stage</h2>
+    <p>Your first step is the Career Stage Diagnostic, a short reflection to understand what season of career you're in right now. In this section we'll be exploring your energy, clarity, stability and momentum.</p>
+    <p>Remember, there are no wrong answers, just honest ones.</p>
+    <div style="text-align:right; margin-top:40px;">
+      <button class="btn-gold" onclick="startSection1()">Begin Career Stage Diagnostic</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 4: QUESTIONS ══ -->
+<div id="screen-question" class="screen">
+  <div class="question-progress" id="q-progress">1/12</div>
+  <div class="question-layout">
+    <div class="question-text" id="q-text"></div>
+    <div class="question-right">
+      <div id="q-options"></div>
+      <div class="question-nav">
+        <button class="btn-outline" id="btn-prev" onclick="prevQuestion()">Previous question</button>
+        <button class="btn-gold" id="btn-next" onclick="nextQuestion()">Next question</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 5: SECTION 2 INTRO ══ -->
+<div id="screen-intro2" class="screen">
+  <div class="intro-container">
+    <h2>Your Career Persona Archetype</h2>
+    <p>You've completed the Career Stage Diagnostic, now it's time to uncover your Career Persona Archetype.</p>
+    <p>This section contains 2 short questions about your current work context and personal season. It helps us understand how you're navigating your career and what patterns, needs, and environments support your next level. It's quick but powerful. Choose what reflects your current personal situation.</p>
+    <div style="text-align:right; margin-top:40px;">
+      <button class="btn-gold" onclick="startSection2()">Continue to Career Persona Archetype</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 6: PROCESSING ══ -->
+<div id="screen-processing" class="screen">
+  <div class="processing-text">
+    <p>Processing your results....</p>
+    <p>Processing Your Clarity Score...</p>
+  </div>
+  <div class="processing-center">
+    <svg class="logo-svg" style="width:140px" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="100" cy="72" rx="28" ry="36" fill="#1a1a2e"/>
+      <path d="M40 75 C20 65 8 50 14 35 C20 20 40 18 55 28" stroke="#b89a2a" stroke-width="8" stroke-linecap="round" fill="none"/>
+      <path d="M160 75 C180 65 192 50 186 35 C180 20 160 18 145 28" stroke="#b89a2a" stroke-width="8" stroke-linecap="round" fill="none"/>
+      <path d="M40 75 C25 82 14 95 20 108 C26 121 44 120 55 112" stroke="#b89a2a" stroke-width="6" stroke-linecap="round" fill="none"/>
+      <path d="M160 75 C175 82 186 95 180 108 C174 121 156 120 145 112" stroke="#b89a2a" stroke-width="6" stroke-linecap="round" fill="none"/>
+      <circle cx="100" cy="76" r="20" fill="#1a1a2e"/>
+      <text x="100" y="145" text-anchor="middle" font-family="Arial" font-weight="800" font-size="18" letter-spacing="5" fill="#1a1a2e">PULLIVARA</text>
+    </svg>
+    <div class="processing-bar"><div class="processing-bar-fill" id="proc-bar"></div></div>
+    <p>Hang tight... We're mapping your clarity profile...</p>
+  </div>
+</div>
+
+<!-- ══ SCREEN 7: RESULTS ══ -->
+<div id="screen-results" class="screen">
+  <p class="results-header">Your Career Clarity Snapshot</p>
+  <p class="results-intro">
+    You're in the <strong id="res-stage">[Stabilising]</strong> phase of your career journey, showing up as a <strong id="res-archetype">[The Resilient Re-builder]</strong>.
+  </p>
+  <div class="results-archetype" id="res-text"></div>
+  <div class="results-cta">
+    <h3>Download Your Full Career Clarity Report + Purpose Path Workbook, your personalised roadmap to navigate out of this phase.</h3>
+    <p>You'll find deeper insights, opportunities, and next steps in your full report.</p>
+    <p>The Pullivara Purpose Path Workbook is your strategy companion built to help you map out a clear, aligned, and actionable next chapter. Inside your full report, you'll also find:</p>
+    <ul>
+      <li>Work environments that match your current energy</li>
+      <li>Suggested role types and industries that fit your profile</li>
+      <li>Real-world examples to inspire your next move</li>
+    </ul>
+    <button class="btn-gold">Download</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
