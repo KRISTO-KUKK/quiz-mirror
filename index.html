@@ -8,6 +8,9 @@
 </head>
 <body>
 
+<div class="error-msg" id="error-global"
+     style="position:fixed; bottom:20px; right:20px; z-index:200; max-width:300px; background:#fff; padding:12px 16px; border-radius:8px; box-shadow:0 2px 12px rgba(0,0,0,0.15);"></div>
+
 <!-- ══ SCREEN 1: LANDING ══ -->
 <div id="screen-landing" class="screen active">
   <div class="landing-hero">
@@ -86,6 +89,7 @@
         <div class="form-hint">Get access code via email</div>
       </div>
       <button class="btn-gold" onclick="sendCode()">Send code</button>
+      <div class="error-msg" id="error-access"></div>
     </div>
 
     <div class="access-logo">
@@ -112,7 +116,9 @@
     <button class="modal-close" onclick="closeModal()">×</button>
     <h3>We've sent the code to your email!</h3>
     <p>Check your spam folder as well</p>
+    <div id="dev-code-hint" style="font-size:12px; color:#b89a2a; margin-bottom:12px;"></div>
     <input type="text" id="input-code" placeholder="Access code" />
+    <div class="error-msg" id="error-modal"></div>
     <button class="btn-dark" onclick="enterCode()">Enter</button>
   </div>
 </div>
@@ -140,6 +146,7 @@
         <button class="btn-outline" id="btn-prev" onclick="prevQuestion()">Previous question</button>
         <button class="btn-gold" id="btn-next" onclick="nextQuestion()">Next question</button>
       </div>
+      <div class="error-msg" id="error-question"></div>
     </div>
   </div>
 </div>
@@ -197,6 +204,11 @@
   </div>
 </div>
 
-<script src="script.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/results.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
