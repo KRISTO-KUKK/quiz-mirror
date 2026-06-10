@@ -237,7 +237,7 @@ body {
 .question-progress {
   font-size: 22px;
   font-weight: 700;
-  color: #aaa;
+  color: rgb(170, 170, 170);
   margin-bottom: 48px;
 }
 
