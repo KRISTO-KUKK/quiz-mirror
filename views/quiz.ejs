@@ -1,0 +1,84 @@
+<%- include('partials/header', { title: 'Career Clarity Test — Pullivara' }) %>
+
+<div class="error-msg" id="error-global"
+     style="position:fixed; bottom:20px; right:20px; z-index:200; max-width:300px; background:#fff; padding:12px 16px; border-radius:8px; box-shadow:0 2px 12px rgba(0,0,0,0.15);"></div>
+
+<!-- ══ SECTION 1 INTRO ══ -->
+<div id="screen-intro1" class="screen active">
+  <div class="intro-container">
+    <h2>Let's Continue with Career Stage</h2>
+    <p>Your first step is the Career Stage Diagnostic, a short reflection to understand what season of career you're in right now. In this section we'll be exploring your energy, clarity, stability and momentum.</p>
+    <p>Remember, there are no wrong answers, just honest ones.</p>
+    <div style="text-align:right; margin-top:40px;">
+      <button class="btn-gold" onclick="startSection1()">Begin Career Stage Diagnostic</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ QUESTIONS ══ -->
+<div id="screen-question" class="screen">
+  <!-- Edenemisriba (FN-KL4-1 kuni FN-KL4-3) -->
+  <div class="progress-wrapper">
+    <div class="progress-sections">
+      <span id="prog-section1" class="prog-section active">Career Stage Diagnostic</span>
+      <span class="prog-divider">›</span>
+      <span id="prog-section2" class="prog-section">Career Persona Archetype</span>
+    </div>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="prog-bar-fill"></div>
+    </div>
+    <div class="progress-counter" id="q-progress">Question 1 of 12</div>
+  </div>
+  <div class="question-layout">
+    <div class="question-text" id="q-text"></div>
+    <div class="question-right">
+      <div id="q-options"></div>
+      <div class="question-nav">
+        <button class="btn-outline" id="btn-prev" onclick="prevQuestion()">Previous question</button>
+        <button class="btn-gold"    id="btn-next" onclick="nextQuestion()">Next question</button>
+      </div>
+      <div class="error-msg" id="error-question"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 2 INTRO ══ -->
+<div id="screen-intro2" class="screen">
+  <div class="intro-container">
+    <h2>Your Career Persona Archetype</h2>
+    <p>You've completed the Career Stage Diagnostic, now it's time to uncover your Career Persona Archetype.</p>
+    <p>This section contains 2 short questions about your current work context and personal season. It helps us understand how you're navigating your career and what patterns, needs, and environments support your next level. It's quick but powerful. Choose what reflects your current personal situation.</p>
+    <div style="text-align:right; margin-top:40px;">
+      <button class="btn-gold" onclick="startSection2()">Continue to Career Persona Archetype</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROCESSING ══ -->
+<div id="screen-processing" class="screen">
+  <div class="processing-text">
+    <p>Processing your results....</p>
+    <p>Processing Your Clarity Score...</p>
+  </div>
+  <div class="processing-center">
+    <svg class="logo-svg" style="width:140px" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="100" cy="72" rx="28" ry="36" fill="#1a1a2e"/>
+      <path d="M40 75 C20 65 8 50 14 35 C20 20 40 18 55 28" stroke="#b89a2a" stroke-width="8" stroke-linecap="round" fill="none"/>
+      <path d="M160 75 C180 65 192 50 186 35 C180 20 160 18 145 28" stroke="#b89a2a" stroke-width="8" stroke-linecap="round" fill="none"/>
+      <path d="M40 75 C25 82 14 95 20 108 C26 121 44 120 55 112" stroke="#b89a2a" stroke-width="6" stroke-linecap="round" fill="none"/>
+      <path d="M160 75 C175 82 186 95 180 108 C174 121 156 120 145 112" stroke="#b89a2a" stroke-width="6" stroke-linecap="round" fill="none"/>
+      <circle cx="100" cy="76" r="20" fill="#1a1a2e"/>
+      <text x="100" y="145" text-anchor="middle" font-family="Arial" font-weight="800" font-size="18" letter-spacing="5" fill="#1a1a2e">PULLIVARA</text>
+    </svg>
+    <div class="processing-bar"><div class="processing-bar-fill" id="proc-bar"></div></div>
+    <p>Hang tight... We're mapping your clarity profile...</p>
+  </div>
+</div>
+
+<script src="/script/nav.js"></script>
+<script src="/script/api.js"></script>
+<script src="/script/quiz.js"></script>
+<script src="/script/results.js"></script>
+<script src="/script/main.js"></script>
+</body>
+</html>
