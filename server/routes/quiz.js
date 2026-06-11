@@ -98,6 +98,22 @@ router.post('/save-answer', async (req, res) => {
   }
 });
 
+// ── POST /api/quiz/abandon ──
+router.post('/abandon', async (req, res) => {
+  try {
+    const { attemptId } = req.body;
+    if (!attemptId) return res.sendStatus(204);
+    await db.query(
+      `UPDATE quiz_attempts SET status = 'abandoned' WHERE id = ? AND status = 'started'`,
+      [attemptId]
+    );
+    res.sendStatus(204);
+  } catch (e) {
+    console.error(e);
+    res.sendStatus(500);
+  }
+});
+
 // ── POST /api/quiz/complete ──
 router.post('/complete', async (req, res) => {
   try {

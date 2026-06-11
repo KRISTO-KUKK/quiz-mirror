@@ -224,3 +224,10 @@ function prevQuestion() {
     renderQuestion();
   }
 }
+
+/* ── ABANDON: saada serverile kui kasutaja lahkub ── */
+window.addEventListener('beforeunload', () => {
+  const attemptId = sessionStorage.getItem('attemptId');
+  if (!attemptId) return;
+  navigator.sendBeacon('/api/quiz/abandon', JSON.stringify({ attemptId: parseInt(attemptId) }));
+});
