@@ -172,6 +172,7 @@ function renderQuestion() {
     btn.addEventListener('click', () => {
       opts.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
+      hideError('error-question');
     });
     opts.appendChild(btn);
   });
@@ -220,6 +221,7 @@ function nextQuestion() {
 
 function prevQuestion() {
   if (currentQ > 0) {
+    hideError('error-question');
     currentQ--;
     renderQuestion();
   }

@@ -10,6 +10,19 @@ function showError(elementId, message) {
   const el = document.getElementById(elementId);
   if (!el) return;
   el.textContent = message;
-  el.style.display = 'block';
-  setTimeout(() => { el.style.display = 'none'; }, 4000);
+  if (el.dataset.hide === 'visibility') {
+    el.style.visibility = 'visible';
+  } else {
+    el.style.display = 'block';
+  }
+}
+
+function hideError(elementId) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  if (el.dataset.hide === 'visibility') {
+    el.style.visibility = 'hidden';
+  } else {
+    el.style.display = 'none';
+  }
 }
