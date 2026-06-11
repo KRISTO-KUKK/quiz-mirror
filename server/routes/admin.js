@@ -2,7 +2,7 @@ const express  = require('express');
 const router   = express.Router();
 const bcrypt   = require('bcryptjs');
 const jwt      = require('jsonwebtoken');
-// const db    = require('../db'); // ← lahti kommenteerida kui DB on valmis
+ const db    = require('../db'); // ← lahti kommenteerida kui DB on valmis
 
 // ── MIDDLEWARE: requireAdmin ──
 function requireAdmin(req, res, next) {
@@ -50,26 +50,18 @@ router.post('/login', async (req, res) => {
 // ── GET /api/admin/stats ──
 router.get('/stats', requireAdmin, async (req, res) => {
   try {
-    // TODO: DB versioon
-    // const [[stats]] = await db.query(`
-    //   SELECT
-    //     COUNT(*) as total_started,
-    //     SUM(status = 'completed') as total_completed,
-    //     SUM(status = 'abandoned') as total_abandoned
-    //   FROM quiz_attempts
-    // `);
-    // const rate = stats.total_started > 0
-    //   ? ((stats.total_completed / stats.total_started) * 100).toFixed(1)
-    //   : 0;
-    // return res.json({ ...stats, completion_rate: parseFloat(rate) });
+     const [[stats]] = await db.query(`
+       SELECT
+         COUNT(*) as total_started,
+         SUM(status = 'completed') as total_completed,
+         SUM(status = 'abandoned') as total_abandoned
+       FROM quiz_attempts
+     `);
+     const rate = stats.total_started > 0
+       ? ((stats.total_completed / stats.total_started) * 100).toFixed(1)
+       : 0;
+     return res.json({ ...stats, completion_rate: parseFloat(rate) });
 
-    // Ajutine placeholder
-    res.json({
-      total_started: 0,
-      total_completed: 0,
-      total_abandoned: 0,
-      completion_rate: 0
-    });
   } catch (e) {
     console.error(e);
     res.status(500).json({ success: false, error: 'Server error' });
@@ -79,22 +71,19 @@ router.get('/stats', requireAdmin, async (req, res) => {
 // ── GET /api/admin/log ──
 router.get('/log', requireAdmin, async (req, res) => {
   try {
-    // TODO: DB versioon
-    // const [rows] = await db.query(`
-    //   SELECT
-    //     qa.id, s.name, s.email,
-    //     qa.started_at, qa.completed_at,
-    //     qa.status, qa.last_question,
-    //     qa.result_stage, qa.result_archetype
-    //   FROM quiz_attempts qa
-    //   JOIN sessions s ON s.id = qa.session_id
-    //   ORDER BY qa.started_at DESC
-    //   LIMIT 100
-    // `);
-    // return res.json(rows);
+     const [rows] = await db.query(`
+       SELECT
+         qa.id, s.name, s.email,
+         qa.started_at, qa.completed_at,
+         qa.status, qa.last_question,
+         qa.result_stage, qa.result_archetype
+       FROM quiz_attempts qa
+       JOIN sessions s ON s.id = qa.session_id
+       ORDER BY qa.started_at DESC
+       LIMIT 100
+     `);
+     return res.json(rows);
 
-    // Ajutine placeholder
-    res.json([]);
   } catch (e) {
     console.error(e);
     res.status(500).json({ success: false, error: 'Server error' });

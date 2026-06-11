@@ -1,0 +1,19 @@
+<%- include('partials/header', { title: 'Error — Pullivara' }) %>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;">
+  <p style="font-size:72px;font-weight:800;color:#b89a2a;margin:0;line-height:1;">
+    <%= status || 500 %>
+  </p>
+  <h1 style="font-size:24px;font-weight:700;margin:16px 0 8px;">
+    <%= title || 'Something went wrong' %>
+  </h1>
+  <p style="color:#888;font-size:15px;max-width:400px;margin:0 0 32px;">
+    <%= message || 'An unexpected error occurred. Please try again.' %>
+  </p>
+  <a href="/" style="background:#b89a2a;color:#fff;padding:12px 28px;border-radius:6px;text-decoration:none;font-weight:600;font-size:15px;">
+    Go Home
+  </a>
+</div>
+
+</body>
+</html>

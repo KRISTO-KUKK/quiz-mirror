@@ -52,7 +52,21 @@ app.get('/admin', (req, res) => {
 
 // ── 404 ──
 app.use((req, res) => {
-  res.status(404).send('Page not found');
+  res.status(404).render('error', {
+    status: 404,
+    title: 'Page not found',
+    message: 'The page you are looking for does not exist.'
+  });
+});
+
+// ── ERROR HANDLER ──
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(err.status || 500).render('error', {
+    status: err.status || 500,
+    title: err.title || 'Something went wrong',
+    message: err.message || 'An unexpected error occurred.'
+  });
 });
 
 // ── START ──

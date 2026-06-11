@@ -1,7 +1,7 @@
 const express      = require('express');
 const router       = require('express').Router();
 const nodemailer   = require('nodemailer');
-// const db        = require('../db'); // ← lahti kommenteerida kui DB on valmis
+const db        = require('../db');
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -47,35 +47,31 @@ function calculateArchetype(answers2) {
 // ── POST /api/quiz/start ──
 router.post('/start', async (req, res) => {
   try {
-    // TODO: DB versioon
-    // const sessionId = req.session.sessionId;
-    // const [existing] = await db.query(
-    //   'SELECT * FROM quiz_attempts WHERE session_id = ? AND status = "started"',
-    //   [sessionId]
-    // );
-    // if (existing.length > 0) {
-    //   const attempt = existing[0];
-    //   return res.json({
-    //     attemptId: attempt.id,
-    //     status: attempt.status,
-    //     lastQuestion: attempt.last_question,
-    //     answersS1: attempt.answers_s1,
-    //     answersS2: attempt.answers_s2,
-    //   });
-    // }
-    // const [result] = await db.query(
-    //   'INSERT INTO quiz_attempts (session_id) VALUES (?)',
-    //   [sessionId]
-    // );
-    // return res.json({ attemptId: result.insertId, status: 'started', lastQuestion: 0 });
-
-    // Ajutine in-memory versioon (kuni DB on valmis)
-    res.json({ attemptId: null, status: 'started', lastQuestion: 0, answersS1: null, answersS2: null });
+     const sessionId = req.session.sessionId;
+     const [existing] = await db.query(
+       'SELECT * FROM quiz_attempts WHERE session_id = ? AND status = "started"',
+       [sessionId]
+     );
+     if (existing.length > 0) {
+       const attempt = existing[0];
+       return res.json({
+         attemptId: attempt.id,
+         status: attempt.status,
+         lastQuestion: attempt.last_question,
+         answersS1: attempt.answers_s1,
+         answersS2: attempt.answers_s2,
+       });
+     }
+     const [result] = await db.query(
+       'INSERT INTO quiz_attempts (session_id) VALUES (?)',
+       [sessionId]
+     );
+     return res.json({ attemptId: result.insertId, status: 'started', lastQuestion: 0 });
   } catch (e) {
     console.error(e);
     res.status(500).json({ success: false, error: 'Server error' });
   }
-});
+});    
 
 // ── POST /api/quiz/save-answer ──
 router.post('/save-answer', async (req, res) => {
@@ -85,16 +81,15 @@ router.post('/save-answer', async (req, res) => {
       return res.status(400).json({ success: false, error: 'Missing fields' });
     }
 
-    // TODO: DB versioon
-    // const field = section === 1 ? 'answers_s1' : 'answers_s2';
-    // const [rows] = await db.query(`SELECT ${field} FROM quiz_attempts WHERE id = ?`, [attemptId]);
-    // const answers = rows[0][field] ? JSON.parse(rows[0][field]) : [];
-    // answers[questionIndex] = answer;
-    // const globalIndex = section === 1 ? questionIndex + 1 : 12 + questionIndex + 1;
-    // await db.query(
-    //   `UPDATE quiz_attempts SET ${field} = ?, last_question = ? WHERE id = ?`,
-    //   [JSON.stringify(answers), globalIndex, attemptId]
-    // );
+     const field = section === 1 ? 'answers_s1' : 'answers_s2';
+     const [rows] = await db.query(`SELECT ${field} FROM quiz_attempts WHERE id = ?`, [attemptId]);
+     const answers = rows[0][field] ? JSON.parse(rows[0][field]) : [];
+     answers[questionIndex] = answer;
+     const globalIndex = section === 1 ? questionIndex + 1 : 12 + questionIndex + 1;
+     await db.query(
+       `UPDATE quiz_attempts SET ${field} = ?, last_question = ? WHERE id = ?`,
+       [JSON.stringify(answers), globalIndex, attemptId]
+     );
 
     res.json({ success: true });
   } catch (e) {
@@ -116,8 +111,7 @@ router.post('/complete', async (req, res) => {
     const archetype    = ARCHETYPES[archetypeIdx];
     const description  = DESCRIPTIONS[archetypeIdx];
 
-    // TODO: DB versioon
-    // await db.query(`UPDATE quiz_attempts SET status='completed', ...`);
+     await db.query(`UPDATE quiz_attempts SET status='completed', ...`);
 
     // Saada tulemus e-postile (FN-KL7-1)
     if (email) {
