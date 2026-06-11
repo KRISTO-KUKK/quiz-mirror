@@ -166,20 +166,15 @@ function renderQuestion() {
   const opts = document.getElementById('q-options');
   opts.innerHTML = '';
   q.opts.forEach((opt, i) => {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'radio-option';
-    const radio = document.createElement('input');
-    radio.type = 'radio';
-    radio.name = 'q-option';
-    radio.id = `opt-${i}`;
-    radio.value = i;
-    if (answers[currentQ] === i) radio.checked = true;
-    const label = document.createElement('label');
-    label.htmlFor = `opt-${i}`;
-    label.textContent = opt;
-    wrapper.appendChild(radio);
-    wrapper.appendChild(label);
-    opts.appendChild(wrapper);
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn' + (answers[currentQ] === i ? ' selected' : '');
+    btn.textContent = opt;
+    btn.dataset.value = i;
+    btn.addEventListener('click', () => {
+      opts.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    });
+    opts.appendChild(btn);
   });
 
   document.getElementById('btn-prev').style.visibility = currentQ === 0 ? 'hidden' : 'visible';
@@ -187,9 +182,8 @@ function renderQuestion() {
 }
 
 function getSelected() {
-  const radios = document.querySelectorAll('input[name="q-option"]');
-  for (const r of radios) { if (r.checked) return parseInt(r.value); }
-  return null;
+  const sel = document.querySelector('#q-options .choice-btn.selected');
+  return sel ? parseInt(sel.dataset.value) : null;
 }
 
 /* ── NAVIGATION ── */
