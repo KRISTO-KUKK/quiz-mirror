@@ -341,12 +341,15 @@ body {
 #screen-processing {
   align-items: center;
   justify-content: center;
-  position: relative;
+  gap: 40px;
+}
+
+#screen-processing .site-logo-btn {
+  display: none;
 }
 
 .processing-text {
-  position: absolute;
-  top: 40px; left: 60px;
+  text-align: center;
 }
 .processing-text p {
   font-size: 28px;
