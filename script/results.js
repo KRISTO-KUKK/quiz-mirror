@@ -127,19 +127,19 @@ const RESULT_DATA = {
 
 /* ── Q2 → archetype map ── NEED TO FIX */
 const Q2_MAP = {
-  0: 3,  // survival mode    → Grounded Giant
-  1: 2,  // transition       → Rising Calf
-  2: 0,  // growth phase     → Nest Rebuilder
-  3: 4,  // rebuilding phase → Re-Emerging Butterfly
-  4: 3   // legacy phase     → Grounded Giant
+  0: 2,  // Experienced, stuck           → Grounded Giant
+  1: 1,  // Mid-level, wants leadership  → Rising Calf
+  2: 0,  // Rebuilding (new country/field)→ Nest Rebuilder
+  3: 3   // Re-emerging after pause      → Re-Emerging Butterfly
 };
 
 /* ── Q1 → archetype map ── */
 const Q1_MAP = {
-  1: 1,  // A → Nest Rebuilder
-  2: 2,  // C → Rising Calf
-  3: 3,  // D → Grounded Giant
-  4: 4   // E → Re-Emerging Butterfly
+  0: 0,  // New to this country          → Nest Rebuilder
+  1: 0,  // Adjusting, new environment   → Nest Rebuilder
+  2: 1,  // Integrated, next level       → Rising Calf
+  3: 2,  // Home country, stuck          → Grounded Giant
+  4: 3   // Working remotely, no path    → Re-Emerging Butterfly
 };
 
 function calculateStage(ans) {
