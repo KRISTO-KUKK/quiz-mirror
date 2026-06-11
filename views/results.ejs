@@ -1,78 +1,59 @@
 <%- include('partials/header', { title: 'Your Results — Pullivara' }) %>
 
 <div id="screen-results" class="screen active">
-  <p class="results-header">Your Career Clarity Snapshot</p>
+  <div class="results-container">
 
-  <div class="results-body">
-    <!-- LEFT: main content -->
-    <div class="results-main">
-      <p class="results-intro">
-        You're in the <strong id="res-stage"></strong> phase of your career journey,
-        showing up as a <strong id="res-archetype"></strong>.
-      </p>
+    <p class="results-header">Your Career Clarity Snapshot</p>
 
-      <p class="results-mirror">It's not just a label — it's a mirror reflecting your moment, your energy, and what's possible next.</p>
+    <h1 class="results-headline">
+      You're in the <span id="res-stage"></span> phase of your career journey,
+      showing up as a <span id="res-archetype"></span>.
+    </h1>
 
-      <div class="results-archetype" id="res-text"></div>
+    <p class="results-mirror">It's not just a label — it's a mirror reflecting your moment, your energy, and what's possible next.</p>
 
-      <div class="results-insights">
-        <h4 class="results-insights-title">What This Means:</h4>
-        <div class="results-insights-grid">
-          <div class="results-insight-item">
-            <span class="insight-label">You might be feeling</span>
-            <span class="insight-value" id="res-feeling"></span>
-          </div>
-          <div class="results-insight-item">
-            <span class="insight-label">You'll thrive in</span>
-            <span class="insight-value" id="res-thrive"></span>
-          </div>
-          <div class="results-insight-item">
-            <span class="insight-label">What's possible now</span>
-            <span class="insight-value" id="res-possible"></span>
-          </div>
+    <div class="results-archetype" id="res-text"></div>
+
+    <div class="results-insights">
+      <h4 class="results-insights-title">Key Insights</h4>
+      <div class="results-insights-grid">
+        <div class="results-insight-item">
+          <span class="insight-label">You might be feeling</span>
+          <span class="insight-value" id="res-feeling"></span>
+        </div>
+        <div class="results-insight-item">
+          <span class="insight-label">You'll thrive in</span>
+          <span class="insight-value" id="res-thrive"></span>
+        </div>
+        <div class="results-insight-item">
+          <span class="insight-label">What's possible now</span>
+          <span class="insight-value" id="res-possible"></span>
         </div>
       </div>
-
-      <div class="results-possible">
-        <h4 class="results-possible-title">What Becomes Possible</h4>
-        <div class="results-possible-grid">
-          <div class="results-possible-item">
-            <span class="possible-label">Right Now</span>
-            <span class="possible-value" id="res-right-now"></span>
-          </div>
-          <div class="results-possible-item">
-            <span class="possible-label">Next 90 Days</span>
-            <span class="possible-value" id="res-next90"></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="results-nextstep">
-        <h4 class="results-nextstep-title">Your Next Step - Tailored to You</h4>
-        <p class="results-nextstep-text" id="res-recommendation"></p>
-        <div class="results-nextstep-meta">
-          <span>Takes 30–60 minutes to begin applying</span>
-          <span>Real stories and tools that meet you where you are</span>
-        </div>
-      </div>
-
-      <p class="results-copyright">This result is for personal use only. It is copyrighted content and may not be copied, shared, or redistributed without written permission from Pullivara Group.</p>
     </div>
 
-    <!-- RIGHT: sticky CTA -->
-    <div class="results-sidebar">
-      <div class="results-cta">
-        <h3>Download Your Full Career Clarity Report + Purpose Path Workbook, your personalised roadmap to navigate out of this phase.</h3>
-        <p>You'll find deeper insights, opportunities, and next steps in your full report.</p>
-        <p>The Pullivara Purpose Path Workbook is your strategy companion built to help you map out a clear, aligned, and actionable next chapter. Inside your full report, you'll also find:</p>
-        <ul>
-          <li>Work environments that match your current energy</li>
-          <li>Suggested role types and industries that fit your profile</li>
-          <li>Real-world examples to inspire your next move</li>
-        </ul>
-        <button class="btn-gold" onclick="downloadResults()">Download</button>
+    <div class="results-possible">
+      <h4 class="results-possible-title">What Becomes Possible</h4>
+      <div class="results-possible-grid">
+        <div class="results-possible-item">
+          <span class="possible-label">Right Now</span>
+          <span class="possible-value" id="res-right-now"></span>
+        </div>
+        <div class="results-possible-item">
+          <span class="possible-label">Next 90 Days</span>
+          <span class="possible-value" id="res-next90"></span>
+        </div>
       </div>
     </div>
+
+    <div class="results-nextstep">
+      <h4 class="results-nextstep-title">Your Next Step — Tailored to You</h4>
+      <p class="results-nextstep-text" id="res-recommendation"></p>
+      <button class="btn-gold" onclick="downloadResults()">Download Full Report</button>
+    </div>
+
+    <p class="results-copyright">This result is for personal use only. It is copyrighted content and may not be copied, shared, or redistributed without written permission from Pullivara Group.</p>
+
   </div>
 </div>
 
