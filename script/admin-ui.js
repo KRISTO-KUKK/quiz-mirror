@@ -75,6 +75,8 @@ async function loadStats() {
     document.getElementById('stat-abandoned').textContent = data.total_abandoned  ?? '—';
     document.getElementById('stat-rate').textContent      =
       data.completion_rate != null ? data.completion_rate + '%' : '—';
+    document.getElementById('stat-dropoff').textContent   =
+      data.avg_dropoff != null ? 'Q' + data.avg_dropoff : '—';
   } catch { /* session expired — already redirected */ }
 }
 

@@ -54,7 +54,8 @@ router.get('/stats', requireAdmin, async (req, res) => {
        SELECT
          COUNT(*) as total_started,
          SUM(status = 'completed') as total_completed,
-         SUM(status = 'abandoned') as total_abandoned
+         SUM(status = 'abandoned') as total_abandoned,
+         ROUND(AVG(CASE WHEN status = 'abandoned' THEN last_question END), 1) as avg_dropoff
        FROM quiz_attempts
      `);
      const rate = stats.total_started > 0
