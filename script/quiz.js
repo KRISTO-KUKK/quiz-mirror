@@ -197,6 +197,15 @@ function nextQuestion() {
   if (currentSection === 1) answers1[currentQ] = sel;
   else answers2[currentQ] = sel;
 
+  const attemptId = sessionStorage.getItem('attemptId');
+  if (attemptId) {
+    fetch('/api/quiz/save-answer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ attemptId: parseInt(attemptId), section: currentSection, questionIndex: currentQ, answer: sel }),
+    }).catch(() => {});
+  }
+
   const questions = currentSection === 1 ? section1 : section2;
   if (currentQ < questions.length - 1) {
     currentQ++;
