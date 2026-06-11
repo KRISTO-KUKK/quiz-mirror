@@ -102,68 +102,139 @@ body {
   flex-direction: column;
 }
 
+/* ── HERO ── */
 .landing-hero {
-  background: RGB(236,235,232);
-  color: #fff;
-  padding: 60px 80px;
+  background: #1a1a2e;
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  gap: 24px;
-  flex: 0 0 auto;
-}
-.landing-hero h1 {
-  font-size: 42px;
-  font-weight: 800;
-  line-height: 1.1;
-  max-width: 420px;
-  color: rgb(29, 35, 62);
-}
-.landing-hero p {
-  font-size: 14px;
-  color: #b0b8cc;
-  font-style: italic;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
 }
 
-.landing-body {
+.landing-hero-inner {
+  max-width: 700px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+}
+
+.landing-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #b89a2a;
+}
+
+.landing-title {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #fff;
+}
+
+.landing-sub {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #a0a8c0;
+  max-width: 520px;
+}
+
+.landing-cta {
+  font-size: 17px;
+  padding: 16px 40px;
+  margin-top: 8px;
+}
+
+.landing-time {
+  font-size: 13px;
+  color: #606880;
+  margin-top: -8px;
+}
+
+/* ── INFO SECTION ── */
+.landing-info {
+  background: #e0ddd8;
+  padding: 80px 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.landing-info-inner {
+  max-width: 900px;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  flex: 1;
+  gap: 60px;
+  align-items: start;
 }
 
-.landing-left {
-  padding: 60px 80px;
+.landing-message {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-}
-.landing-left h2 { font-size: 36px; font-weight: 800; }
-.landing-left p { font-size: 15px; line-height: 1.7; color: #333; }
-
-.landing-logo-area {
-  margin-top: auto;
+  gap: 18px;
 }
 
-.landing-right {
-  padding: 60px 60px;
-  border-left: 1px solid #ccc;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-.landing-intro-text {
-  font-size: 15px;
+.landing-message p {
+  font-size: 16px;
   line-height: 1.8;
-  color: #333;
+  color: #444;
 }
 
-.section-card {
-  background: rgba(255,255,255,0.4);
-  border-radius: 10px;
-  padding: 24px 28px;
+.landing-sign {
+  font-size: 15px !important;
+  color: #333 !important;
+  margin-top: 8px;
 }
-.section-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-.section-card p { font-size: 14px; color: #555; line-height: 1.6; }
+.landing-sign em {
+  font-weight: 700;
+  font-style: normal;
+  color: #1a1a2e;
+}
+.landing-sign span {
+  display: block;
+  font-size: 13px;
+  color: #888;
+  margin-top: 2px;
+}
+
+.landing-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.landing-section-card {
+  background: rgba(255,255,255,0.6);
+  border-radius: 12px;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.landing-section-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #b89a2a;
+}
+
+.landing-section-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.landing-section-card p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.65;
+}
 
 /* ══════════════════════════════════
    SCREEN 2 — REQUEST ACCESS
