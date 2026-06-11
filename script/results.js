@@ -4,8 +4,7 @@
 const stages = ['Surviving', 'Stabilising', 'Strategising'];
 
 const ARCHETYPES = [
-  'Nest Rebuilder',         // 0
-  'Rebuilder',              // 1
+  'Nest Rebuilder',         // 1
   'Rising Calf',            // 2
   'Grounded Giant',         // 3
   'Re-Emerging Butterfly'   // 4
@@ -126,7 +125,7 @@ const RESULT_DATA = {
   }
 };
 
-/* ── Q2 → archetype map ── */
+/* ── Q2 → archetype map ── NEED TO FIX */
 const Q2_MAP = {
   0: 3,  // survival mode    → Grounded Giant
   1: 2,  // transition       → Rising Calf
@@ -137,8 +136,7 @@ const Q2_MAP = {
 
 /* ── Q1 → archetype map ── */
 const Q1_MAP = {
-  0: 0,  // A → Nest Rebuilder
-  1: 1,  // B → Rebuilder
+  1: 1,  // A → Nest Rebuilder
   2: 2,  // C → Rising Calf
   3: 3,  // D → Grounded Giant
   4: 4   // E → Re-Emerging Butterfly

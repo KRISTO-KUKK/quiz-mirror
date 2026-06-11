@@ -5,97 +5,97 @@ const section1 = [
   {
     q: "What best describes your current job status?",
     opts: [
-      "I'm unemployed or doing anything I can to survive",
-      "I have a job, but it's not aligned or ideal",
-      "I'm working in a role that fits my skills and current goals"
-    ]
-  },
-  {
-    q: "How do you feel about your career direction right now?",
-    opts: [
-      "I feel lost, stuck, or disconnected from any direction",
-      "I'm figuring it out and taking small steps",
-      "I'm clear on what I want and moving towards it"
+      "Unemployed or between roles",
+      "Employed but feeling unsettled or underutilised",
+      "Actively employed and fairly content"
     ]
   },
   {
     q: "How confident are you navigating your current job market?",
     opts: [
-      "I feel overwhelmed or unsure where to begin",
-      "I have some understanding but still second-guess a lot",
-      "I'm confident in my ability to navigate, search, and position myself"
+      "Not very — it feels overwhelming",
+      "Somewhat — I know a few things but feel uncertain",
+      "Fairly — I have a good sense of what's out there"
     ]
   },
   {
-    q: "How stable is your life overall?",
+    q: " How do you feel about your career direction right now?",
     opts: [
-      "Things feel chaotic or uncertain in multiple areas",
-      "Some parts are stable, others not yet",
-      "My life is steady enough to plan and grow from"
+      "Lost or very unclear",
+      "Starting to get clearer but still uncertain",
+      "Fairly clear on where I'm headed"
     ]
   },
   {
-    q: "How would you describe your energy and motivation right now?",
+    q: " How stable is your life overall right now?",
     opts: [
-      "I'm exhausted and barely keeping up",
-      "I have some drive but it comes and goes",
-      "I'm energised and ready to invest in my growth"
+      "Very unstable — lots of changes at once",
+      "Somewhat stable, but areas of uncertainty remain",
+      "Mostly stable and grounded"
     ]
   },
   {
-    q: "How clear are you on your professional strengths?",
+    q: "How supported do you feel professionally?",
     opts: [
-      "I'm not sure what I'm good at or how to communicate it",
-      "I have a rough idea but struggle to articulate it clearly",
-      "I know my strengths and can speak to them confidently"
+      "Not supported at all",
+      "Somewhat supported",
+      "Well supported"
     ]
   },
   {
-    q: "How would you describe your professional network right now?",
+    q: "What is your current energy level for career growth?",
     opts: [
-      "I don't really have one or haven't started building",
-      "I have some connections but haven't leveraged them much",
-      "I have a solid network I actively use and grow"
+      "Low — I'm in survival mode",
+      "Medium — I want to grow but I'm managing capacity",
+      "High — I'm ready to push forward"
     ]
   },
   {
-    q: "How would you rate your current financial stability?",
+    q: "How visible are you professionally (online or in your community)?",
     opts: [
-      "I'm struggling financially and it's affecting my decisions",
-      "I'm getting by but there's not much room to invest in myself",
-      "I'm financially stable enough to focus on growth"
+      "Not visible at all",
+      "A little — I have some presence",
+      "Quite visible — people know my work"
     ]
   },
   {
-    q: "How do you feel about your resume and LinkedIn profile?",
+    q: "How clearly can you describe your professional goals?",
     opts: [
-      "They're outdated or don't reflect who I am now",
-      "They exist but could be much stronger",
-      "They're polished and accurately represent my value"
+      "I can't really describe them yet",
+      "I have a rough sense of what I want",
+      "I can describe them clearly and specifically"
     ]
   },
   {
-    q: "How often are you taking action towards your career goals?",
+    q: "Which statement best reflects your readiness to act?",
     opts: [
-      "Rarely — I'm not sure where to start or what to do",
-      "Sometimes — I try but I'm inconsistent",
-      "Regularly — I have a plan and I'm working it"
+      "I need to sort out basics before anything career-related",
+      "I'm thinking about it and starting to plan",
+      "I'm ready to take concrete action now"
     ]
   },
   {
-    q: "How supported do you feel in your career journey?",
+    q: "How do you feel about asking for help or mentorship?",
     opts: [
-      "I feel very alone with little guidance or support",
-      "I have some support but it's limited or inconsistent",
-      "I have strong support systems that help me move forward"
+      "Very uncomfortable — I wouldn't know who or how",
+      "A little uncomfortable but I'm open to it",
+      "Comfortable — I actively seek guidance"
     ]
   },
   {
-    q: "What's your biggest career focus right now?",
+    q: "How much control do you feel you have over your career?",
     opts: [
-      "Survival — getting income and stability",
-      "Transition — finding a better fit or direction",
-      "Growth — levelling up and expanding my impact"
+      "Very little — things feel out of my hands",
+      "Some — I'm working on it",
+      "A lot — I feel empowered to shape my path"
+    ]
+  },
+  {
+    q: "If your dream role appeared today, would you be ready?",
+    opts: [
+      "No — I don't feel ready at all",
+      "Somewhat — I'd need some prep",
+      "Yes — I'd go for it confidently"
     ]
   }
 ];
@@ -104,21 +104,20 @@ const section2 = [
   {
     q: "Which best describes your work context right now?",
     opts: [
-      "I'm new to this country or system — still adapting and finding my footing",
-      "I've been here a while, but I'm still figuring out how to thrive",
-      "I'm fairly integrated but seeking to level up or expand",
-      "I'm re-entering the workforce after a career break",
-      "I'm pivoting into a completely new field or industry"
+      "New to this country or professional system",
+      "Adjusting, but still navigating challenges in a new environment",
+      "Integrated but looking for the next level",
+      "In my home country but feeling stuck or underutilised",
+      "Working remotely or globally, without a clear path forward"
     ]
   },
   {
-    q: "Which best describes your personal season right now?",
+    q: "Which of these best describes your current season of life?",
     opts: [
-      "I'm in survival mode — focused on basics and stability",
-      "I'm in transition — things are shifting and I'm finding my footing",
-      "I'm in a growth phase — ready to invest and expand",
-      "I'm in a rebuilding phase — recovering and redefining my path",
-      "I'm in a legacy phase — seeking purpose and longer-term impact"
+      "I'm an experienced professional but feel stuck or underutilised",
+      "I'm in a mid-level role and want to grow into leadership or visibility",
+      "I'm rebuilding in a new country, industry, or field",
+      "I'm re-emerging after a pause, burnout, or caregiving"
     ]
   }
 ];
