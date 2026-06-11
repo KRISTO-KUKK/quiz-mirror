@@ -3,41 +3,112 @@
 <div id="screen-results" class="screen active">
   <p class="results-header">Your Career Clarity Snapshot</p>
 
-  <p class="results-intro">
-    You're in the <strong id="res-stage"></strong> phase of your career journey,
-    showing up as a <strong id="res-archetype"></strong>.
-  </p>
+  <div class="results-body">
+    <!-- LEFT: main content -->
+    <div class="results-main">
+      <p class="results-intro">
+        You're in the <strong id="res-stage"></strong> phase of your career journey,
+        showing up as a <strong id="res-archetype"></strong>.
+      </p>
 
-  <div class="results-archetype" id="res-text"></div>
+      <p class="results-mirror">It's not just a label — it's a mirror reflecting your moment, your energy, and what's possible next.</p>
 
-  <div class="results-cta">
-    <h3>Download Your Full Career Clarity Report + Purpose Path Workbook, your personalised roadmap to navigate out of this phase.</h3>
-    <p>You'll find deeper insights, opportunities, and next steps in your full report.</p>
-    <p>The Pullivara Purpose Path Workbook is your strategy companion built to help you map out a clear, aligned, and actionable next chapter. Inside your full report, you'll also find:</p>
-    <ul>
-      <li>Work environments that match your current energy</li>
-      <li>Suggested role types and industries that fit your profile</li>
-      <li>Real-world examples to inspire your next move</li>
-    </ul>
-    <button class="btn-gold" onclick="downloadResults()">Download</button>
+      <div class="results-archetype" id="res-text"></div>
+
+      <div class="results-insights">
+        <h4 class="results-insights-title">What This Means:</h4>
+        <div class="results-insights-grid">
+          <div class="results-insight-item">
+            <span class="insight-label">You might be feeling</span>
+            <span class="insight-value" id="res-feeling"></span>
+          </div>
+          <div class="results-insight-item">
+            <span class="insight-label">You'll thrive in</span>
+            <span class="insight-value" id="res-thrive"></span>
+          </div>
+          <div class="results-insight-item">
+            <span class="insight-label">What's possible now</span>
+            <span class="insight-value" id="res-possible"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-nextstep">
+        <h4 class="results-nextstep-title">Your Next Step - Tailored to You</h4>
+        <p class="results-nextstep-text" id="res-recommendation"></p>
+        <div class="results-nextstep-meta">
+          <span>Takes 30–60 minutes to begin applying</span>
+          <span>Real stories and tools that meet you where you are</span>
+        </div>
+      </div>
+
+      <p class="results-copyright">This result is for personal use only. It is copyrighted content and may not be copied, shared, or redistributed without written permission from Pullivara Group.</p>
+    </div>
+
+    <!-- RIGHT: sticky CTA -->
+    <div class="results-sidebar">
+      <div class="results-cta">
+        <h3>Download Your Full Career Clarity Report + Purpose Path Workbook, your personalised roadmap to navigate out of this phase.</h3>
+        <p>You'll find deeper insights, opportunities, and next steps in your full report.</p>
+        <p>The Pullivara Purpose Path Workbook is your strategy companion built to help you map out a clear, aligned, and actionable next chapter. Inside your full report, you'll also find:</p>
+        <ul>
+          <li>Work environments that match your current energy</li>
+          <li>Suggested role types and industries that fit your profile</li>
+          <li>Real-world examples to inspire your next move</li>
+        </ul>
+        <button class="btn-gold" onclick="downloadResults()">Download</button>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
   (function () {
-    const stage       = sessionStorage.getItem('resultStage')       || '';
-    const archetype   = sessionStorage.getItem('resultArchetype')   || '';
-    const description = sessionStorage.getItem('resultDescription') || '';
-    const name        = sessionStorage.getItem('userName')          || '';
+    /* ── All stage × archetype insight data (mirrors results.js) ── */
+    const RESULT_DATA = {
+      'Surviving_Grounded Giant':       { description: "You've built deep experience — but right now, you're stuck in a system or role that no longer fits. This stage is not a failure — it's a call to rest, reorient, and re-claim your strength.", feeling: "Heavy with wisdom but low on mobility", thrive: "Safe, structured environments that don't demand reinvention", possible: "Even in stillness, clarity and strategic recovery are possible", recommendation: "Book a Visibility & Clarity Intensive to realign your experience with future-facing opportunities" },
+      'Surviving_Nest Rebuilder':       { description: "You're new — to this country, this field, or this identity. That takes immense courage. Right now, focus on safety, income, and skill translation. Your clarity will grow from stability.", feeling: "Out of sync or unsure how to position your past experience", thrive: "Low-barrier roles and empathetic environments", possible: "Local traction and recognition are within reach, one bridge at a time", recommendation: "Start the 5-Step Immigrant Success Path for guidance on job market adaptation, visibility, and early wins" },
+      'Surviving_Re-Emerging Butterfly':{ description: "You've stepped back — now you're stretching your wings again. This stage is tender. Focus on low-pressure roles, energy recovery, and micro-visibility.", feeling: "Unsure of your pace or capacity", thrive: "Supportive teams or project-based roles", possible: "Mini wins will rebuild momentum and self-trust", recommendation: "Book a Rest-to-Relaunch Session designed to help you plan a soft return that honours your story" },
+      'Surviving_Rising Calf':          { description: "You're trying to grow, but the ground beneath you is soft. Instead of pushing upward, strengthen your footing — tools, clarity, community.", feeling: "Eager but unsupported or misunderstood", thrive: "Structured settings with clear roles that help build confidence", possible: "This is a season for learning the rules before trying to lead", recommendation: "Enroll in the Clarity Jumpstart Course to build your foundation and sharpen your visibility game" },
+      'Surviving_Rebuilder':            { description: "You're in a meaningful but tender transition. Right now, the priority is stability — income, grounding, and small steps forward. Every anchor you build now is a foundation for what comes next.", feeling: "Somewhere between uncertain and quietly determined", thrive: "Supportive, low-pressure environments with room to grow steadily", possible: "Stability is closer than it feels — and it's the launchpad for everything ahead", recommendation: "Start with the 5-Step Immigrant Success Path to build your footing and gain early traction" },
+      'Stabilising_Grounded Giant':     { description: "You're starting to move again. That power you carry is real. Use this phase to test small pivots, rewrite your career story, and rebuild your network from a fresh center.", feeling: "Cautious but hopeful", thrive: "Environments that allow small experiments with support", possible: "Strategic recovery now leads to smarter leaps later", recommendation: "Join the Career Story Rewrite Workshop to repurpose your past into powerful positioning" },
+      'Stabilising_Nest Rebuilder':     { description: "You've survived the landing. Now, build your nest. Start by translating your skills, joining local networks, and piloting roles or side-projects that feel aligned.", feeling: "Semi-settled but not fully seen", thrive: "Familiar but flexible roles with growth possibility", possible: "Relationships and skill translation now = traction later", recommendation: "Download the Local Leverage Toolkit to translate your experience for new opportunities" },
+      'Stabilising_Re-Emerging Butterfly':{ description: "You're back — but not at full speed. This is your rebuild era. Choose projects that stretch gently. Make visibility feel safe again. You're not starting from scratch — you're starting from experience.", feeling: "Wiser but wobbly", thrive: "Gentle accountability and low-stakes exposure", possible: "You're allowed to rebrand while still recovering", recommendation: "Join a Visibility Reset Circle to re-enter safely while building strength" },
+      'Stabilising_Rising Calf':        { description: "You've grown stronger — now it's time to step forward. Try on leadership shadows, ask for stretch assignments, and explore your values. Visibility is calling.", feeling: "Ready but unsure where to start", thrive: "Project ownership and internal visibility", possible: "People are watching. Step up softly — then strategically", recommendation: "Book a Mid-Level Momentum Mapping Session to prep for your leadership leap" },
+      'Stabilising_Rebuilder':          { description: "You're finding your rhythm. The fog is lifting and you're beginning to see what's possible. This is the phase to experiment, connect, and refine what you're building toward.", feeling: "Like you're almost there — but not quite sure what 'there' looks like yet", thrive: "Roles with flexibility and room to test new directions", possible: "Clarity comes through action — your next step will reveal the one after it", recommendation: "Download the Local Leverage Toolkit to sharpen how you position and present yourself" },
+      'Strategising_Grounded Giant':    { description: "You've done the inner work — now it's time to reframe your power. Lead from wisdom. Take up space. Package your career story and show up as the authority you already are.", feeling: "Seasoned but under-recognised", thrive: "High-autonomy roles or thought leadership paths", possible: "It's time to build presence that matches your power", recommendation: "Book a Personal Brand Authority Intensive to elevate your story and step into legacy-building roles" },
+      'Strategising_Nest Rebuilder':    { description: "Your transition has become transformation. Now's the time to pitch boldly, claim visibility, and join decision-making spaces. Your outsider lens is your leadership edge.", feeling: "Stronger than others perceive you to be", thrive: "Leadership-track roles in mission-driven organisations", possible: "You're not just ready — you're rare", recommendation: "Apply for the Bold Transition Accelerator to own your value and position yourself for high-impact roles" },
+      'Strategising_Re-Emerging Butterfly':{ description: "You've re-emerged with clarity. Let's make this era yours. Think platform-building, thought leadership, mentoring others. You're here to lead differently — and people are watching.", feeling: "Pulled to share your story or shape systems", thrive: "Hybrid roles or portfolio careers that let you fly wide", possible: "Your voice is valid — and needed", recommendation: "Join the Legacy Builder Lab to shape your platform, message, and mentorship model" },
+      'Strategising_Rising Calf':       { description: "You're ready for the leap. Apply for that role. Launch that idea. Get seen. Your next season is not about proving — it's about positioning.", feeling: "Ambitious but craving strategy and mentorship", thrive: "Roles with influence and mentorship duties", possible: "This is your chance to become who you once admired", recommendation: "Start the Strategic Ascent Program for mid-level leaders preparing for bold transitions" },
+      'Strategising_Rebuilder':         { description: "You've made it through and come out with hard-earned clarity. Now it's time to own your story, lead with intention, and claim the space you've earned.", feeling: "Clear-eyed and ready to move with purpose", thrive: "Environments where your resilience is seen as an asset", possible: "Your story is your strategy — use it boldly", recommendation: "Book a Personal Brand Authority Intensive to step confidently into your next chapter" }
+    };
+
+    const stage     = sessionStorage.getItem('resultStage')     || '';
+    const archetype = sessionStorage.getItem('resultArchetype') || '';
+    const name      = sessionStorage.getItem('userName')        || '';
 
     if (!stage) {
       window.location.href = '/';
       return;
     }
 
-    document.getElementById('res-stage').textContent     = stage;
-    document.getElementById('res-archetype').textContent = archetype;
-    document.getElementById('res-text').innerHTML        = description.replace(/\n/g, '<br><br>');
+    /* Look up data from the map, falling back to whatever was stored */
+    const key  = `${stage}_${archetype}`;
+    const data = RESULT_DATA[key] || {};
+
+    const description    = data.description    || sessionStorage.getItem('resultDescription')    || '';
+    const feeling        = data.feeling        || sessionStorage.getItem('resultFeeling')        || '';
+    const thrive         = data.thrive         || sessionStorage.getItem('resultThrive')         || '';
+    const possible       = data.possible       || sessionStorage.getItem('resultPossible')       || '';
+    const recommendation = data.recommendation || sessionStorage.getItem('resultRecommendation') || '';
+
+    document.getElementById('res-stage').textContent          = stage;
+    document.getElementById('res-archetype').textContent      = archetype;
+    document.getElementById('res-text').innerHTML             = description.replace(/\n/g, '<br><br>');
+    document.getElementById('res-feeling').textContent        = feeling;
+    document.getElementById('res-thrive').textContent         = thrive;
+    document.getElementById('res-possible').textContent       = possible;
+    document.getElementById('res-recommendation').textContent = recommendation;
 
     window.downloadResults = function () {
       const script = document.createElement('script');
