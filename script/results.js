@@ -25,14 +25,12 @@ function showResults() {
   sessionStorage.setItem('resultStage',     stage);
   sessionStorage.setItem('resultArchetype', archetype);
 
-  const email     = sessionStorage.getItem('userEmail') || '';
-  const name      = sessionStorage.getItem('userName')  || '';
   const attemptId = sessionStorage.getItem('attemptId');
 
   fetch('/api/quiz/complete', {
     method:  'POST',
     headers: { 'Content-Type': 'application/json' },
-    body:    JSON.stringify({ attemptId: attemptId ? parseInt(attemptId) : null, answersS1: answers1, answersS2: answers2, email, name }),
+    body:    JSON.stringify({ attemptId: attemptId ? parseInt(attemptId) : null, answersS1: answers1, answersS2: answers2 }),
   }).catch(() => {});
 
   window.location.href = '/results';

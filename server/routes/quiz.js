@@ -10,7 +10,7 @@ router.use(requireAuth);
 // ── POST /api/quiz/start ──
 router.post('/start', async (req, res) => {
   try {
-     const sessionId = req.body.sessionId ?? null;
+     const sessionId = req.auth.id;
      const [existing] = await db.query(
        'SELECT * FROM quiz_attempts WHERE session_id = ? AND status = "started"',
        [sessionId]
@@ -45,13 +45,19 @@ router.post('/save-answer', async (req, res) => {
     }
 
      const field = section === 1 ? 'answers_s1' : 'answers_s2';
-     const [rows] = await db.query(`SELECT ${field} FROM quiz_attempts WHERE id = ?`, [attemptId]);
+     const [rows] = await db.query(
+       `SELECT ${field} FROM quiz_attempts WHERE id = ? AND session_id = ?`,
+       [attemptId, req.auth.id]
+     );
+     if (rows.length === 0) {
+       return res.status(404).json({ success: false, error: 'Quiz attempt not found' });
+     }
      const answers = rows[0][field] ? JSON.parse(rows[0][field]) : [];
      answers[questionIndex] = answer;
      const globalIndex = section === 1 ? questionIndex + 1 : 12 + questionIndex + 1;
      await db.query(
-       `UPDATE quiz_attempts SET ${field} = ?, last_question = ? WHERE id = ?`,
-       [JSON.stringify(answers), globalIndex, attemptId]
+       `UPDATE quiz_attempts SET ${field} = ?, last_question = ? WHERE id = ? AND session_id = ?`,
+       [JSON.stringify(answers), globalIndex, attemptId, req.auth.id]
      );
 
     res.json({ success: true });
@@ -67,8 +73,10 @@ router.post('/abandon', async (req, res) => {
     const { attemptId } = req.body;
     if (!attemptId) return res.sendStatus(204);
     await db.query(
-      `UPDATE quiz_attempts SET status = 'abandoned' WHERE id = ? AND status = 'started'`,
-      [attemptId]
+      `UPDATE quiz_attempts
+       SET status = 'abandoned'
+       WHERE id = ? AND session_id = ? AND status = 'started'`,
+      [attemptId, req.auth.id]
     );
     res.sendStatus(204);
   } catch (e) {
@@ -80,7 +88,7 @@ router.post('/abandon', async (req, res) => {
 // ── POST /api/quiz/complete ──
 router.post('/complete', async (req, res) => {
   try {
-    const { attemptId, answersS1, answersS2, email, name } = req.body;
+    const { attemptId, answersS1, answersS2 } = req.body;
     if (!answersS1 || !answersS2) {
       return res.status(400).json({ success: false, error: 'Missing answers' });
     }
@@ -95,14 +103,13 @@ router.post('/complete', async (req, res) => {
          SET status = 'completed', completed_at = NOW(),
              result_stage = ?, result_archetype = ?,
              answers_s1 = ?, answers_s2 = ?
-         WHERE id = ? AND status = 'started'`,
-        [stage, archetype, JSON.stringify(answersS1), JSON.stringify(answersS2), attemptId]
+         WHERE id = ? AND session_id = ? AND status = 'started'`,
+        [stage, archetype, JSON.stringify(answersS1), JSON.stringify(answersS2), attemptId, req.auth.id]
       );
     }
 
-    if (email) {
-      sendResult(name, email, stage, archetype).catch(err => console.error('Result email error:', err));
-    }
+    sendResult(req.auth.name, req.auth.email, stage, archetype)
+      .catch(err => console.error('Result email error:', err));
 
     res.json({ success: true, stage, archetype });
   } catch (e) {

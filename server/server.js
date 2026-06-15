@@ -54,6 +54,7 @@ app.get('/', (req, res) => {
 
 // Access (email + kood)
 app.get('/access', (req, res) => {
+  res.clearCookie('userToken');
   res.render('access');
 });
 

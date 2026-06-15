@@ -1,14 +1,31 @@
 const jwt = require('jsonwebtoken');
+const db = require('../db');
 
-function requireAuth(req, res, next) {
+function rejectUnauthorized(req, res) {
+  res.clearCookie('userToken');
+  if (req.originalUrl.startsWith('/api/')) {
+    return res.status(401).json({ error: 'Authentication required' });
+  }
+  return res.redirect('/access');
+}
+
+async function requireAuth(req, res, next) {
   const cookieHeader = req.headers.cookie || '';
   const match = cookieHeader.match(/(?:^|;\s*)userToken=([^;]+)/);
-  if (!match) return res.redirect('/access');
+  if (!match) return rejectUnauthorized(req, res);
+
   try {
-    jwt.verify(match[1], process.env.JWT_SECRET);
+    const payload = jwt.verify(match[1], process.env.JWT_SECRET);
+    const [rows] = await db.query(
+      'SELECT id, name, email FROM sessions WHERE id = ? AND authenticated = 1 LIMIT 1',
+      [payload.sessionId]
+    );
+
+    if (rows.length === 0) throw new Error('Session not found');
+    req.auth = rows[0];
     next();
   } catch {
-    res.redirect('/access');
+    return rejectUnauthorized(req, res);
   }
 }
 
