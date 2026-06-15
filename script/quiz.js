@@ -127,7 +127,6 @@ let currentSection = 1;
 let currentQ = 0;
 let answers1 = new Array(12).fill(null);
 let answers2 = new Array(2).fill(null);
-let currentAttemptId = null;
 
 /* ── START ── */
 function startSection1() {

@@ -87,7 +87,6 @@ body {
   align-items: center;
   gap: 6px;
 }
-.logo-svg { width: 80px; }
 .logo-name {
   font-size: 18px;
   font-weight: 800;
@@ -337,13 +336,6 @@ body {
   justify-content: center;
 }
 
-.question-progress {
-  font-size: 22px;
-  font-weight: 700;
-  color: #aaa;
-  margin-bottom: 48px;
-}
-
 .question-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -435,7 +427,6 @@ body {
   align-items: center;
   gap: 24px;
 }
-.processing-center .logo-svg { width: 120px; }
 .processing-center p {
   font-size: 15px;
   color: #555;
@@ -658,6 +649,7 @@ body {
   color: #293562;
   text-align: right;
 }
+
 /* ══ ADMIN DASHBOARD ══ */
 
 #view-dashboard {
@@ -744,27 +736,4 @@ body {
 .log-table tbody td:first-child {
   color: #aaa;
   font-size: 12px;
-}
-
-.badge {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.badge-completed {
-  background: #e6f9f0;
-  color: #1a8a52;
-}
-
-.badge-abandoned {
-  background: #fdecea;
-  color: #c0392b;
-}
-
-.badge-started {
-  background: #fff3cd;
-  color: #b89a2a;
 }

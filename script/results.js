@@ -1,8 +1,6 @@
 /* ── RESULTS.JS — Tulemuste arvutamine ja kuvamine ── */
 
 /* ── SCORING DATA ── */
-const stages = ['Surviving', 'Stabilising', 'Strategising'];
-
 const ARCHETYPES = [
   'Nest Rebuilder',         // 1
   'Rising Calf',            // 2
