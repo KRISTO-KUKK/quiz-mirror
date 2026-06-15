@@ -231,5 +231,6 @@ function prevQuestion() {
 window.addEventListener('beforeunload', () => {
   const attemptId = sessionStorage.getItem('attemptId');
   if (!attemptId) return;
-  navigator.sendBeacon('/api/quiz/abandon', JSON.stringify({ attemptId: parseInt(attemptId) }));
+  const payload = new Blob([JSON.stringify({ attemptId: parseInt(attemptId) })], { type: 'application/json' });
+  navigator.sendBeacon('/api/quiz/abandon', payload);
 });

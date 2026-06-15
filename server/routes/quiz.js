@@ -131,7 +131,7 @@ router.post('/complete', async (req, res) => {
       }).catch(err => console.error('Result email error:', err));
     }
 
-    res.json({ success: true, stage, archetype, description });
+    res.json({ success: true, stage, archetype });
   } catch (e) {
     console.error(e);
     res.status(500).json({ success: false, error: 'Server error' });

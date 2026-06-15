@@ -80,6 +80,10 @@ async function loadStats() {
   } catch { /* session expired — already redirected */ }
 }
 
+function esc(str) {
+  return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
 async function loadLog() {
   const tbody = document.getElementById('log-tbody');
   try {
@@ -91,13 +95,13 @@ async function loadLog() {
     tbody.innerHTML = rows.map((r, i) => `
       <tr>
         <td>${i + 1}</td>
-        <td>${r.name   || '—'}</td>
-        <td>${r.email  || '—'}</td>
+        <td>${esc(r.name)}</td>
+        <td>${esc(r.email)}</td>
         <td>${r.started_at   ? new Date(r.started_at).toLocaleString()   : '—'}</td>
         <td>${r.completed_at ? new Date(r.completed_at).toLocaleString() : '—'}</td>
-        <td>${r.status || '—'}</td>
+        <td>${esc(r.status)}</td>
         <td>${r.last_question != null ? r.last_question : '—'}</td>
-        <td>${[r.result_stage, r.result_archetype].filter(Boolean).join(' / ') || '—'}</td>
+        <td>${esc([r.result_stage, r.result_archetype].filter(Boolean).join(' / ')) || '—'}</td>
       </tr>
     `).join('');
   } catch {
