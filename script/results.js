@@ -21,18 +21,9 @@ function showResults() {
   const stage        = calculateStage(answers1);
   const archetypeIdx = calculateArchetype(answers2);
   const archetype    = ARCHETYPES[archetypeIdx];
-  const key          = `${stage}_${archetype}`;
-  const data         = RESULT_DATA[key] || RESULT_DATA[`Stabilising_${archetype}`] || {};
 
-  sessionStorage.setItem('resultStage',          stage);
-  sessionStorage.setItem('resultArchetype',      archetype);
-  sessionStorage.setItem('resultDescription',    data.description    || '');
-  sessionStorage.setItem('resultFeeling',        data.feeling        || '');
-  sessionStorage.setItem('resultThrive',         data.thrive         || '');
-  sessionStorage.setItem('resultPossible',       data.possible       || '');
-  sessionStorage.setItem('resultRightNow',       data.rightNow       || '');
-  sessionStorage.setItem('resultNext90',         data.next90         || '');
-  sessionStorage.setItem('resultRecommendation', data.recommendation || '');
+  sessionStorage.setItem('resultStage',     stage);
+  sessionStorage.setItem('resultArchetype', archetype);
 
   const email     = sessionStorage.getItem('userEmail') || '';
   const name      = sessionStorage.getItem('userName')  || '';

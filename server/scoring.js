@@ -35,4 +35,4 @@ function calculateArchetype(answers2) {
   return (tag1 === tag2) ? tag1 : tag2;
 }
 
-module.exports = { ARCHETYPES, Q1_MAP, Q2_MAP, calculateStage, calculateArchetype };
+module.exports = { ARCHETYPES, calculateStage, calculateArchetype };
