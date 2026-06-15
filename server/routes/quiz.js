@@ -2,7 +2,7 @@ const express    = require('express');
 const router     = express.Router();
 const db         = require('../db');
 const { sendResult }                                     = require('../services/mailer');
-const { ARCHETYPES, calculateStage, calculateArchetype } = require('../scoring');
+const { ARCHETYPES, calculateStage, calculateArchetype } = require('../../script/scoring');
 const { requireAuth } = require('../middleware/auth');
 
 router.use(requireAuth);
