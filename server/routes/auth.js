@@ -1,17 +1,9 @@
-const express    = require('express');
-const router     = express.Router();
-const nodemailer = require('nodemailer');
-const crypto     = require('crypto');
-const jwt        = require('jsonwebtoken');
-const db         = require('../db');
-
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+const express  = require('express');
+const router   = express.Router();
+const crypto   = require('crypto');
+const jwt      = require('jsonwebtoken');
+const db       = require('../db');
+const { sendAccessCode } = require('../services/mailer');
 
 router.post('/send-code', async (req, res) => {
   const { name, email } = req.body;
@@ -26,20 +18,7 @@ router.post('/send-code', async (req, res) => {
       [name, email, code, expiresAt]
     );
 
-    await transporter.sendMail({
-      from: `"Pullivara" <${process.env.EMAIL_USER}>`,
-      to: email,
-      subject: 'Your Pullivara Access Code',
-      html: `
-        <div style="font-family:Arial,sans-serif;max-width:480px;margin:auto;">
-          <h2 style="color:#1a1a2e;">Hi ${name},</h2>
-          <p>Your access code for the Career Clarity Test is:</p>
-          <div style="font-size:36px;font-weight:800;letter-spacing:8px;color:#b89a2a;margin:24px 0;">${code}</div>
-          <p style="color:#888;font-size:13px;">This code expires in 10 minutes.</p>
-          <p>Warmly,<br><strong>Pullivara Group</strong></p>
-        </div>
-      `,
-    });
+    await sendAccessCode(name, email, code);
     res.json({ success: true });
   } catch (err) {
     console.error('Email error:', err);
@@ -76,7 +55,7 @@ router.post('/verify-code', async (req, res) => {
 
   res.cookie('userToken', token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: req.secure || req.get('x-forwarded-proto') === 'https',
     sameSite: 'lax',
     maxAge: 2 * 60 * 60 * 1000,
   });

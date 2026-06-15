@@ -2,8 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const path    = require('path');
 const cors    = require('cors');
-const jwt     = require('jsonwebtoken');
 const initDatabase = require('./init-db');
+const { requireAuth } = require('./middleware/auth');
 
 const requiredEnvironmentVariables = [
   'EMAIL_USER',
@@ -24,19 +24,8 @@ function validateEnvironment() {
   }
 }
 
-function requireAuth(req, res, next) {
-  const cookieHeader = req.headers.cookie || '';
-  const match = cookieHeader.match(/(?:^|;\s*)userToken=([^;]+)/);
-  if (!match) return res.redirect('/access');
-  try {
-    jwt.verify(match[1], process.env.JWT_SECRET);
-    next();
-  } catch {
-    res.redirect('/access');
-  }
-}
-
 const app = express();
+app.set('trust proxy', 1);
 
 // ── VIEW ENGINE ──
 app.set('view engine', 'ejs');
