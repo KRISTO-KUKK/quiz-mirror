@@ -11,23 +11,26 @@ const transporter = nodemailer.createTransport({
 // ── SKOORIMISLOOGIKA ──
 
 const ARCHETYPES = [
-  'Nest Rebuilder',         // 0
-  'Rebuilder',              // 1
-  'Rising Calf',            // 2
-  'Grounded Giant',         // 3
-  'Re-Emerging Butterfly'   // 4
+  'Nest Rebuilder',        // 0
+  'Rising Calf',           // 1
+  'Grounded Giant',        // 2
+  'Re-Emerging Butterfly'  // 3
 ];
 
-const DESCRIPTIONS = [
-  "This unique combination reflects your current reality and potential career pathway. You're experienced, perhaps even overqualified, but you feel undervalued, unseen, or out of sync with your current environment. This mix can be frustrating, especially when you know you have more to offer.\n\nRight now, your challenge isn't lack of skill, it's misalignment. Systems, structures, or seasons of life may be weighing you down. But there is power in pausing and recalibrating.",
-  "You're in a meaningful transition — moving from where you were to where you're meant to be. The path forward requires clarity on your values, your strengths, and the environments where you thrive.",
-  "You have the momentum and the vision. This is the phase to be strategic about the opportunities you pursue, the relationships you cultivate, and the legacy you're beginning to build.",
-  "You've found your footing and you're grounded. Now it's about expanding your reach while staying true to your values and what's working well for you.",
-  "You're ready to take bold leaps into new territory. Your resilience and adaptability are your greatest assets as you pioneer your next chapter."
-];
+const Q1_MAP = {
+  0: 0,  // New to this country          → Nest Rebuilder
+  1: 0,  // Adjusting, new environment   → Nest Rebuilder
+  2: 1,  // Integrated, next level       → Rising Calf
+  3: 2,  // Home country, stuck          → Grounded Giant
+  4: 3   // Working remotely, no path    → Re-Emerging Butterfly
+};
 
-const Q1_MAP = { 0: 0, 1: 1, 2: 2, 3: 3, 4: 4 };
-const Q2_MAP = { 0: 3, 1: 2, 2: 0, 3: 4 };
+const Q2_MAP = {
+  0: 2,  // Experienced, stuck            → Grounded Giant
+  1: 1,  // Mid-level, wants leadership   → Rising Calf
+  2: 0,  // Rebuilding (new country/field)→ Nest Rebuilder
+  3: 3   // Re-emerging after pause       → Re-Emerging Butterfly
+};
 
 function calculateStage(answers) {
   const score = answers.reduce((sum, v) => sum + (v ?? 0), 0);
@@ -47,7 +50,7 @@ function calculateArchetype(answers2) {
 // ── POST /api/quiz/start ──
 router.post('/start', async (req, res) => {
   try {
-     const sessionId = req.session.sessionId;
+     const sessionId = req.body.sessionId ?? null;
      const [existing] = await db.query(
        'SELECT * FROM quiz_attempts WHERE session_id = ? AND status = "started"',
        [sessionId]
@@ -117,7 +120,7 @@ router.post('/abandon', async (req, res) => {
 // ── POST /api/quiz/complete ──
 router.post('/complete', async (req, res) => {
   try {
-    const { answersS1, answersS2, email, name } = req.body;
+    const { attemptId, answersS1, answersS2, email, name } = req.body;
     if (!answersS1 || !answersS2) {
       return res.status(400).json({ success: false, error: 'Missing answers' });
     }
@@ -125,14 +128,21 @@ router.post('/complete', async (req, res) => {
     const stage        = calculateStage(answersS1);
     const archetypeIdx = calculateArchetype(answersS2);
     const archetype    = ARCHETYPES[archetypeIdx];
-    const description  = DESCRIPTIONS[archetypeIdx];
 
-     await db.query(`UPDATE quiz_attempts SET status='completed', ...`);
+    if (attemptId) {
+      await db.query(
+        `UPDATE quiz_attempts
+         SET status = 'completed', completed_at = NOW(),
+             result_stage = ?, result_archetype = ?,
+             answers_s1 = ?, answers_s2 = ?
+         WHERE id = ? AND status = 'started'`,
+        [stage, archetype, JSON.stringify(answersS1), JSON.stringify(answersS2), attemptId]
+      );
+    }
 
     // Saada tulemus e-postile (FN-KL7-1)
     if (email) {
       const greeting = name ? `Hi ${name},` : 'Hi,';
-      const descHtml = description.replace(/\n/g, '<br><br>');
       transporter.sendMail({
         from:    `"Pullivara" <${process.env.EMAIL_USER}>`,
         to:      email,
@@ -151,8 +161,6 @@ router.post('/complete', async (req, res) => {
                 <td style="padding:12px 16px;background:#faf8f3;">${archetype}</td>
               </tr>
             </table>
-            <h3 style="color:#b89a2a;">Your Profile</h3>
-            <p>${descHtml}</p>
             <hr style="border:none;border-top:1px solid #ddd;margin:32px 0;">
             <p style="color:#888;font-size:13px;">Warmly,<br><strong>Pullivara Group</strong></p>
           </div>

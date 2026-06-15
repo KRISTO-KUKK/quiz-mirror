@@ -62,11 +62,9 @@ async function enterCode() {
       showError('error-modal', data.error || 'Invalid code.');
       return;
     }
-    if (data.token) {
-      setAuthToken(data.token);
-    }
-    sessionStorage.setItem('userName', data.name || '');
+    sessionStorage.setItem('userName',  data.name      || '');
     sessionStorage.setItem('userEmail', email);
+    sessionStorage.setItem('sessionId', data.sessionId || '');
     closeModal();
     window.location.href = '/quiz';
   } catch (err) {

@@ -2,6 +2,7 @@ const express    = require('express');
 const router     = express.Router();
 const nodemailer = require('nodemailer');
 const crypto     = require('crypto');
+const jwt        = require('jsonwebtoken');
 const db         = require('../db');
 
 const transporter = nodemailer.createTransport({
@@ -67,7 +68,6 @@ router.post('/verify-code', async (req, res) => {
     [session.id]
   );
 
-  const jwt = require('jsonwebtoken');
   const token = jwt.sign(
     { sessionId: session.id, name: session.name },
     process.env.JWT_SECRET,
