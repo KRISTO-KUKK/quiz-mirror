@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
     const data = await res.json();
     if (data.attemptId) sessionStorage.setItem('attemptId', data.attemptId);
+    resumeQuiz(data);            // taasta pooleli jäänud test (või alusta algusest)
   } catch (e) {
     console.error('Quiz start error:', e);
+    goTo('screen-intro1');       // võrgu/serveri viga → tavaline algus
   }
-
-  goTo('screen-intro1');
 });

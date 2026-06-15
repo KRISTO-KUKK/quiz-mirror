@@ -143,6 +143,41 @@ function startSection2() {
   goTo('screen-question');
 }
 
+/* ── RESUME — taasta pooleli jäänud test serveri andmetest ──
+   lastQuestion on globaalne loendur (vt save-answer): 0 = midagi vastamata,
+   1–12 = sektsioon 1, 13–14 = sektsioon 2. */
+function resumeQuiz(data) {
+  const parseAnswers = (raw, len) => {
+    let arr = [];
+    if (Array.isArray(raw)) arr = raw;
+    else if (typeof raw === 'string' && raw) { try { arr = JSON.parse(raw); } catch { arr = []; } }
+    const out = new Array(len).fill(null);
+    arr.forEach((v, i) => { if (i < len) out[i] = v; });
+    return out;
+  };
+
+  answers1 = parseAnswers(data.answersS1, 12);
+  answers2 = parseAnswers(data.answersS2, 2);
+
+  const last = data.lastQuestion || 0;
+
+  if (last <= 0) {                 // pole alustanud → tavaline algus
+    goTo('screen-intro1');
+  } else if (last < 12) {          // sektsioon 1 pooleli → järgmine vastamata küsimus
+    currentSection = 1;
+    currentQ = last;
+    renderQuestion();
+    goTo('screen-question');
+  } else if (last === 12) {        // sektsioon 1 läbi → sektsiooni 2 sissejuhatus
+    goTo('screen-intro2');
+  } else {                         // sektsioon 2 pooleli (13) või kõik vastatud (14)
+    currentSection = 2;
+    currentQ = last < 14 ? last - 12 : 1;
+    renderQuestion();
+    goTo('screen-question');
+  }
+}
+
 /* ── RENDER ── */
 function renderQuestion() {
   const questions = currentSection === 1 ? section1 : section2;
