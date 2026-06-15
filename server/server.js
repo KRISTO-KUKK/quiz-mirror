@@ -10,7 +10,6 @@ const requiredEnvironmentVariables = [
   'EMAIL_PASS',
   'JWT_SECRET',
   'ADMIN_USERNAME',
-  'ADMIN_PASSWORD_HASH',
   'DB_HOST',
   'DB_USER',
   'DB_PASS',
@@ -19,6 +18,9 @@ const requiredEnvironmentVariables = [
 
 function validateEnvironment() {
   const missing = requiredEnvironmentVariables.filter((name) => !process.env[name]);
+  if (!process.env.ADMIN_PASSWORD && !process.env.ADMIN_PASSWORD_HASH) {
+    missing.push('ADMIN_PASSWORD or ADMIN_PASSWORD_HASH');
+  }
   if (missing.length > 0) {
     throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
   }

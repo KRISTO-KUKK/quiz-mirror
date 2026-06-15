@@ -17,7 +17,9 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ success: false, error: 'Invalid credentials' });
     }
 
-    const valid = await bcrypt.compare(password, process.env.ADMIN_PASSWORD_HASH);
+    const valid = process.env.ADMIN_PASSWORD
+      ? password === process.env.ADMIN_PASSWORD
+      : await bcrypt.compare(password, process.env.ADMIN_PASSWORD_HASH);
     if (!valid) {
       return res.status(401).json({ success: false, error: 'Invalid credentials' });
     }
