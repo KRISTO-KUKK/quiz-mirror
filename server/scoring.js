@@ -7,14 +7,8 @@ const ARCHETYPES = [
   'Re-Emerging Butterfly'  // 3
 ];
 
-const Q1_MAP = {
-  0: 0,  // New to this country          → Nest Rebuilder
-  1: 0,  // Adjusting, new environment   → Nest Rebuilder
-  2: 1,  // Integrated, next level       → Rising Calf
-  3: 2,  // Home country, stuck          → Grounded Giant
-  4: 3   // Working remotely, no path    → Re-Emerging Butterfly
-};
-
+// Arhetüüp määratakse 2. sektsiooni teise küsimuse põhjal (eluetapp).
+// Esimene küsimus (töökontekst) salvestatakse, kuid ei mõjuta praegu arhetüüpi.
 const Q2_MAP = {
   0: 2,  // Experienced, stuck             → Grounded Giant
   1: 1,  // Mid-level, wants leadership    → Rising Calf
@@ -30,9 +24,7 @@ function calculateStage(answers) {
 }
 
 function calculateArchetype(answers2) {
-  const tag1 = Q1_MAP[answers2[0] ?? 0];
-  const tag2 = Q2_MAP[answers2[1] ?? 0];
-  return (tag1 === tag2) ? tag1 : tag2;
+  return Q2_MAP[answers2[1] ?? 0];
 }
 
 module.exports = { ARCHETYPES, calculateStage, calculateArchetype };
