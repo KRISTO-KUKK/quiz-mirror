@@ -4,7 +4,8 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server/server.js",
+    "check": "node --check server/server.js && node --check server/db.js && node --check server/init-db.js && node --check server/routes/auth.js && node --check server/routes/quiz.js && node --check server/routes/admin.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

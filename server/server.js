@@ -3,6 +3,26 @@ const express = require('express');
 const path    = require('path');
 const cors    = require('cors');
 const jwt     = require('jsonwebtoken');
+const initDatabase = require('./init-db');
+
+const requiredEnvironmentVariables = [
+  'EMAIL_USER',
+  'EMAIL_PASS',
+  'JWT_SECRET',
+  'ADMIN_USERNAME',
+  'ADMIN_PASSWORD_HASH',
+  'DB_HOST',
+  'DB_USER',
+  'DB_PASS',
+  'DB_NAME',
+];
+
+function validateEnvironment() {
+  const missing = requiredEnvironmentVariables.filter((name) => !process.env[name]);
+  if (missing.length > 0) {
+    throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
+  }
+}
 
 function requireAuth(req, res, next) {
   const cookieHeader = req.headers.cookie || '';
@@ -56,6 +76,10 @@ app.get('/admin', (req, res) => {
   res.render('admin');
 });
 
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
 // ── 404 ──
 app.use((req, res) => {
   res.status(404).render('error', {
@@ -77,4 +101,14 @@ app.use((err, req, res, next) => {
 
 // ── START ──
 const PORT = process.env.PORT || 8118;
-app.listen(PORT, () => console.log(`Running on http://localhost:${PORT}`));
+
+async function start() {
+  validateEnvironment();
+  await initDatabase();
+  app.listen(PORT, '0.0.0.0', () => console.log(`Running on port ${PORT}`));
+}
+
+start().catch((err) => {
+  console.error('Startup failed:', err);
+  process.exit(1);
+});

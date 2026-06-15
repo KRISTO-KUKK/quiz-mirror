@@ -74,7 +74,12 @@ router.post('/verify-code', async (req, res) => {
     { expiresIn: '2h' }
   );
 
-  res.cookie('userToken', token, { httpOnly: true, sameSite: 'lax', maxAge: 2 * 60 * 60 * 1000 });
+  res.cookie('userToken', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 2 * 60 * 60 * 1000,
+  });
   res.json({ success: true, name: session.name, sessionId: session.id });
 });
 
