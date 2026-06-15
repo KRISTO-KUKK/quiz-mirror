@@ -3,6 +3,9 @@ const router     = express.Router();
 const db         = require('../db');
 const { sendResult }                                     = require('../services/mailer');
 const { ARCHETYPES, calculateStage, calculateArchetype } = require('../scoring');
+const { requireAuth } = require('../middleware/auth');
+
+router.use(requireAuth);
 
 // ── POST /api/quiz/start ──
 router.post('/start', async (req, res) => {

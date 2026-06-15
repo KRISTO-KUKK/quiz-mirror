@@ -2,19 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const path    = require('path');
 const cors    = require('cors');
-const jwt     = require('jsonwebtoken');
-
-function requireAuth(req, res, next) {
-  const cookieHeader = req.headers.cookie || '';
-  const match = cookieHeader.match(/(?:^|;\s*)userToken=([^;]+)/);
-  if (!match) return res.redirect('/access');
-  try {
-    jwt.verify(match[1], process.env.JWT_SECRET);
-    next();
-  } catch {
-    res.redirect('/access');
-  }
-}
+const { requireAuth } = require('./middleware/auth');
 
 const app = express();
 

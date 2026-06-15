@@ -2,20 +2,8 @@ const express  = require('express');
 const router   = express.Router();
 const bcrypt   = require('bcryptjs');
 const jwt      = require('jsonwebtoken');
- const db    = require('../db'); // ← lahti kommenteerida kui DB on valmis
-
-// ── MIDDLEWARE: requireAdmin ──
-function requireAdmin(req, res, next) {
-  const token = req.headers.authorization?.split(' ')[1];
-  if (!token) return res.status(403).json({ error: 'Forbidden' });
-  try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
-    if (payload.role !== 'admin') throw new Error();
-    next();
-  } catch {
-    res.status(403).json({ error: 'Forbidden' });
-  }
-}
+const db       = require('../db');
+const { requireAdmin } = require('../middleware/auth');
 
 // ── POST /api/admin/login ──
 router.post('/login', async (req, res) => {
