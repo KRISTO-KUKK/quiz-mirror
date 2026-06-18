@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-labelledby="title desc">
+  <title id="title">Pullivara Career Clarity Test preview</title>
+  <desc id="desc">Simple preview image of the landing page and quiz cards.</desc>
+  <rect width="900" height="520" fill="#e0ddd8"/>
+  <rect x="54" y="42" width="792" height="436" rx="30" fill="#1a1a2e"/>
+  <circle cx="106" cy="91" r="9" fill="#b89a2a"/>
+  <circle cx="134" cy="91" r="9" fill="#f5f0e8" opacity=".7"/>
+  <circle cx="162" cy="91" r="9" fill="#f5f0e8" opacity=".35"/>
+  <text x="450" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="4" fill="#b89a2a">PULLIVARA</text>
+  <text x="450" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="800" fill="#ffffff">Career Clarity</text>
+  <text x="450" y="262" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="800" fill="#ffffff">Snapshot</text>
+  <text x="450" y="305" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#a0a8c0">A short quiz for career stage and persona feedback</text>
+  <rect x="348" y="342" width="204" height="52" rx="10" fill="#b89a2a"/>
+  <text x="450" y="374" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#ffffff">Take the test</text>
+  <rect x="94" y="418" width="330" height="84" rx="14" fill="#ffffff" opacity=".16"/>
+  <rect x="476" y="418" width="330" height="84" rx="14" fill="#ffffff" opacity=".16"/>
+  <text x="126" y="454" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#b89a2a">01</text>
+  <text x="126" y="480" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#ffffff">Career Stage Diagnostic</text>
+  <text x="508" y="454" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#b89a2a">02</text>
+  <text x="508" y="480" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#ffffff">Career Persona Archetype</text>
+</svg>

@@ -23,13 +23,6 @@ async function sendCode() {
       showError('error-access', data.error || 'Failed to send code.');
       return;
     }
-    // Dev mode: kui backend tagastab koodi otse, näita seda
-    const hint = document.getElementById('dev-code-hint');
-    if (hint) {
-      hint.textContent = data.code
-        ? `Dev mode — kood: ${data.code}`
-        : '';
-    }
     document.getElementById('modal-email').classList.add('open');
   } catch (err) {
     showError('error-access', 'Connection error. Please try again.');
