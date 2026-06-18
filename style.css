@@ -57,7 +57,7 @@ body {
 
 /* ── PERSISTENT HOME LOGO ── */
 .site-logo-btn {
-  position: fixed;
+  position: absolute;
   top: 20px;
   left: 28px;
   z-index: 999;
@@ -122,11 +122,7 @@ body {
 }
 
 .landing-eyebrow {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #b89a2a;
+  display: none;
 }
 
 .landing-title {
@@ -752,6 +748,15 @@ body {
 
   .site-logo-btn img {
     height: 30px;
+  }
+
+  #screen-landing .site-logo-btn {
+    left: 24px;
+    transform: none;
+  }
+
+  #screen-landing .site-logo-btn:hover {
+    transform: scale(1.04);
   }
 
   .landing-hero {
