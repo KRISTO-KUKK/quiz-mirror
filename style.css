@@ -737,3 +737,296 @@ body {
   color: #aaa;
   font-size: 12px;
 }
+
+/* ══ RESPONSIVE LAYOUT ══ */
+@media (max-width: 900px) {
+  .site-logo-btn {
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .site-logo-btn:hover {
+    transform: translateX(-50%) scale(1.04);
+  }
+
+  .site-logo-btn img {
+    height: 30px;
+  }
+
+  .landing-hero {
+    min-height: 92vh;
+    padding: 92px 24px 56px;
+  }
+
+  .landing-title {
+    font-size: clamp(34px, 10vw, 48px);
+    line-height: 1.08;
+  }
+
+  .landing-sub {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .landing-info {
+    padding: 52px 22px;
+  }
+
+  .landing-info-inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .landing-message {
+    text-align: center;
+  }
+
+  .landing-section-card {
+    padding: 22px;
+  }
+
+  .access-container {
+    display: flex;
+    min-height: 100vh;
+    padding: 96px 24px 40px;
+    justify-content: flex-start;
+  }
+
+  .access-form {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .access-form h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 28px;
+  }
+
+  .access-logo {
+    display: none;
+  }
+
+  .access-logo img {
+    width: 0 !important;
+  }
+
+  .form-group input,
+  .modal input {
+    min-height: 48px;
+    font-size: 16px;
+  }
+
+  .access-form .btn-gold,
+  .modal .btn-dark {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .modal {
+    width: calc(100% - 32px);
+    padding: 34px 24px 28px;
+  }
+
+  .intro-container {
+    padding: 96px 24px 44px;
+  }
+
+  .intro-container h2 {
+    font-size: 30px;
+    line-height: 1.15;
+  }
+
+  .intro-container p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .intro-container .btn-gold,
+  .intro-container > div[style*="text-align:right"] .btn-gold {
+    width: 100%;
+  }
+
+  .progress-wrapper {
+    padding: 88px 22px 20px;
+  }
+
+  .progress-sections {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .question-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: start;
+    padding: 0 22px 36px;
+  }
+
+  .question-text {
+    font-size: clamp(25px, 7.5vw, 34px);
+    line-height: 1.18;
+  }
+
+  #q-options {
+    gap: 12px;
+  }
+
+  .choice-btn {
+    padding: 16px;
+    font-size: 15px;
+  }
+
+  .question-nav {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 22px;
+  }
+
+  .question-nav .btn-outline,
+  .question-nav .btn-gold {
+    width: 100%;
+  }
+
+  #screen-processing {
+    padding: 84px 24px 40px;
+  }
+
+  .processing-text p {
+    font-size: 23px;
+  }
+
+  #screen-results {
+    padding: 88px 22px 40px;
+  }
+
+  .results-container {
+    gap: 26px;
+  }
+
+  .results-headline {
+    font-size: clamp(25px, 7vw, 32px);
+  }
+
+  .results-archetype {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .results-insights {
+    border-left: 0;
+    border-top: 3px solid #b89a2a;
+    padding-left: 0;
+    padding-top: 18px;
+  }
+
+  .results-possible-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .results-nextstep {
+    padding: 26px 22px;
+  }
+
+  .results-nextstep .btn-gold {
+    width: 100%;
+  }
+
+  #view-login {
+    padding: 92px 22px 36px;
+  }
+
+  #view-login > div {
+    padding: 34px 24px !important;
+  }
+
+  #view-dashboard {
+    padding: 88px 18px 36px !important;
+  }
+
+  #view-dashboard > div:first-child {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 18px;
+    margin-bottom: 28px !important;
+  }
+
+  #view-dashboard .btn-outline {
+    width: 100%;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 20px 14px;
+  }
+
+  .stat-number {
+    font-size: 30px;
+  }
+
+  .log-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 520px) {
+  .btn-gold,
+  .btn-outline,
+  .btn-dark {
+    padding: 13px 18px;
+  }
+
+  .landing-hero-inner {
+    gap: 20px;
+  }
+
+  .landing-title br {
+    display: none;
+  }
+
+  .landing-cta {
+    width: 100%;
+  }
+
+  .landing-hero-inner a {
+    width: 100%;
+  }
+
+  .landing-message p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .landing-section-card {
+    text-align: left;
+  }
+
+  .access-container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .progress-counter {
+    text-align: left;
+  }
+
+  .results-mirror {
+    margin-top: -8px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
