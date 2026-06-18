@@ -1,6 +1,5 @@
 # Pullivara Career Clarity Test
 
-![Pullivara eelvaade](docs/pullivara-preview.svg)
 
 ## Mis see on?
 
@@ -15,7 +14,6 @@ Projekt on tehtud Tallinna Ülikooli Digitehnoloogiate instituudi õppetöö raa
 - Jako Puusepp
 - Kevin Saluste
 - Samuel Beekmann
-- Nikita Soroka
 
 ## Kasutatud tehnoloogiad
 
@@ -41,7 +39,6 @@ Eeldused:
 
 - Node.js ja npm
 - MySQL server
-- Gmaili app password või muu toimiv SMTP seadistus Gmaili jaoks
 
 1. Klooni repo:
 
@@ -71,7 +68,7 @@ ADMIN_PASSWORD=admin123
 
 DB_HOST=localhost
 DB_PORT=3306
-DB_USER=root
+DB_USER=mysql_user
 DB_PASS=parool
 DB_NAME=pullivara
 ```
@@ -133,35 +130,6 @@ Admini vaade on:
 
 ```text
 http://localhost:8118/admin
-```
-
-## Deployment Coolifyga
-
-Projektis on `Dockerfile`, seega Coolifys saab valida Dockerfile build'i.
-
-Olulisemad muutujad Coolifys:
-
-```env
-PORT=8118
-NODE_ENV=production
-DB_HOST=<mysql-internal-host>
-DB_PORT=3306
-DB_USER=<mysql-user>
-DB_PASS=<mysql-password>
-DB_NAME=<mysql-database>
-EMAIL_USER=<gmail-address>
-EMAIL_PASS=<gmail-app-password>
-JWT_SECRET=<long-random-secret>
-ADMIN_USERNAME=admin
-ADMIN_PASSWORD=<admin-password>
-```
-
-MySQL host peab olema Coolify sisemine host, mitte `localhost`.
-
-Healthcheck:
-
-```text
-/health
 ```
 
 ## Projekti struktuur
